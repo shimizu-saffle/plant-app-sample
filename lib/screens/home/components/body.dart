@@ -13,9 +13,41 @@ class Body extends StatelessWidget {
       child: Column(
         children: [
           HeaderWithSearchBox(size: size),
-          const TitleWithCustomUnderLine(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+            child: TitleWithMoreButton(),
+          ),
         ],
       ),
+    );
+  }
+}
+
+class TitleWithMoreButton extends StatelessWidget {
+  const TitleWithMoreButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const TitleWithCustomUnderLine(text: 'Recommended'),
+        const Spacer(),
+        ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            primary: kPrimaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Text('More'),
+          ),
+        )
+      ],
     );
   }
 }
@@ -23,7 +55,10 @@ class Body extends StatelessWidget {
 class TitleWithCustomUnderLine extends StatelessWidget {
   const TitleWithCustomUnderLine({
     Key? key,
+    required this.text,
   }) : super(key: key);
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +66,11 @@ class TitleWithCustomUnderLine extends StatelessWidget {
       height: 24,
       child: Stack(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: kDefaultPadding / 4),
+          Padding(
+            padding: const EdgeInsets.only(left: kDefaultPadding / 4),
             child: Text(
-              'Recommended',
-              style: TextStyle(
+              text,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
