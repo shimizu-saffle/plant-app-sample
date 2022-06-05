@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../../constants.dart';
 
 class RecommendsPlants extends StatelessWidget {
   const RecommendsPlants({
@@ -22,7 +22,7 @@ class RecommendsPlants extends StatelessWidget {
           ),
           _RecommendPlantCard(
             image: 'assets/images/image_2.png',
-            title: 'Samantha',
+            title: 'Angelica',
             country: 'Russia',
             price: 400,
             onTap: () {},
