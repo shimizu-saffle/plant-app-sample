@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plant_app_sample/constants.dart';
 
 import '../../../components/header_with_search_box.dart';
+import '../../../components/title_with_more_button.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -12,78 +13,74 @@ class Body extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          HeaderWithSearchBox(size: size),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: TitleWithMoreButton(),
-          ),
+          const HeaderWithSearchBox(),
+          TitleWithMoreButton(title: 'Recommended', onPressed: () {}),
+          const RecommendPlantCard()
         ],
       ),
     );
   }
 }
 
-class TitleWithMoreButton extends StatelessWidget {
-  const TitleWithMoreButton({
-    Key? key,
-  }) : super(key: key);
+class RecommendPlantCard extends StatelessWidget {
+  const RecommendPlantCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const TitleWithCustomUnderLine(text: 'Recommended'),
-        const Spacer(),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            primary: kPrimaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text('More'),
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class TitleWithCustomUnderLine extends StatelessWidget {
-  const TitleWithCustomUnderLine({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 24,
-      child: Stack(
+    final size = MediaQuery.of(context).size;
+    return Container(
+      margin: const EdgeInsets.only(
+        left: kDefaultPadding,
+        top: kDefaultPadding / 2,
+        bottom: kDefaultPadding * 2.5,
+      ),
+      width: size.width * 0.4,
+      child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: kDefaultPadding / 4),
-            child: Text(
-              text,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+          Image.asset('assets/images/image_1.png'),
+          Container(
+            padding: const EdgeInsets.all(kDefaultPadding / 2),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
               ),
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, 10),
+                  blurRadius: 50,
+                  color: kPrimaryColor.withOpacity(0.23),
+                )
+              ],
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              margin: const EdgeInsets.only(right: kDefaultPadding / 4),
-              height: 7,
-              color: kPrimaryColor.withOpacity(0.2),
+            child: Row(
+              children: [
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Samantha\n'.toUpperCase(),
+                        style: Theme.of(context).textTheme.button,
+                      ),
+                      TextSpan(
+                        text: 'Russia'.toUpperCase(),
+                        style: TextStyle(
+                          color: kPrimaryColor.withOpacity(0.5),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  '\$400',
+                  style: Theme.of(context)
+                      .textTheme
+                      .button!
+                      .copyWith(color: kPrimaryColor),
+                )
+              ],
             ),
           )
         ],

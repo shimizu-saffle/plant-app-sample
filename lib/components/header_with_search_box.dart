@@ -4,15 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import '../constants.dart';
 
 class HeaderWithSearchBox extends StatelessWidget {
-  const HeaderWithSearchBox({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
+  const HeaderWithSearchBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(bottom: kDefaultPadding * 2.5),
       height: size.height * 0.2,
